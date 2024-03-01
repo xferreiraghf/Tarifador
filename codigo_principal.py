@@ -17,7 +17,7 @@ def executar_codigo_secundario_com_progresso():
     messagebox.showinfo("Concluído", "O processo foi concluído com sucesso!") 
 
 def buscar_arquivo():
-    filename = filedialog.askopenfilename(initialdir="/", title="Selecione um arquivo", filetypes=(("Arquivos ZIP", "*.rar"), ("Todos os arquivos", "*.*")))
+    filename = filedialog.askopenfilename(initialdir="/", title="Selecione um arquivo", filetypes=(("Arquivos RAR", "*.rar"), ("Todos os arquivos", "*.*")))
     if filename:
         input_busca.delete(0, "end")
         input_busca.insert(0, filename) 
