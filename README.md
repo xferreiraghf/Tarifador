@@ -40,6 +40,67 @@ Esta função extrai informações de CNPJ de um arquivo PDF especificado para a
 
 Esta função extrai os valores totais das faturas de um arquivo PDF especificado. Utiliza a biblioteca PyPDF2 para extrair o texto do PDF e expressões regulares para encontrar os valores totais das faturas. Retorna um dicionário onde as chaves são os números de fatura e os valores são os valores totais correspondentes.
 
+### Funções Detalhadas
+
+1.  **`extrair_arquivo_rar(arquivo_rar, pasta_destino)`**:
+    
+    -   Esta função recebe o caminho de um arquivo RAR e o diretório de destino para extração.
+    -   Utiliza a biblioteca `patoolib` para extrair o arquivo RAR.
+    -   Em seguida, busca por arquivos TXT na pasta extraída e retorna o caminho do primeiro arquivo encontrado.
+2.  **`converter_para_xlsx(caminho_arquivo_txt)`**:
+    
+    -   Recebe o caminho de um arquivo TXT como entrada.
+    -   Utiliza o `pandas` para ler o arquivo CSV separado por ponto e vírgula.
+    -   Agrega os dados agrupando pelo número da fatura (`NumNF`) e calculando a soma dos valores (`Valor`) e mantendo o primeiro mês de referência (`MesRef`).
+    -   Seleciona apenas as colunas desejadas.
+    -   Salva os dados em um arquivo XLSX, renomeando-o para "fatura.xlsx".
+3.  **`extract_cnpj(text)`**:
+    
+    -   Recebe uma string de texto como entrada.
+    -   Utiliza expressões regulares para encontrar e extrair números de CNPJ da string.
+    -   Retorna uma lista contendo todos os CNPJs encontrados.
+4.  **`extract_faturas_cnpj_from_pdf(pdf_path, faturas)`**:
+    
+    -   Extrai informações de CNPJ de um arquivo PDF fornecido para as faturas especificadas.
+    -   Utiliza a biblioteca `PyPDF2` para extrair o texto do PDF.
+    -   Procura por padrões específicos nas faturas para encontrar os CNPJs.
+    -   Retorna uma lista de tuplas contendo o número da fatura e o CNPJ correspondente.
+5.  **`extrair_valores(pdf_path)`**:
+    
+    -   Extrai os valores totais das faturas de um arquivo PDF especificado.
+    -   Utiliza `PyPDF2` para extrair o texto do PDF.
+    -   Usa expressões regulares para encontrar os valores totais e os números de fatura.
+    -   Retorna um dicionário onde as chaves são os números de fatura e os valores são os valores totais correspondentes.
+
+### Fluxo de Execução do Script
+
+1.  **Preparação do Ambiente**:
+    
+    -   Verifica a existência do arquivo RAR contendo as faturas.
+    -   Cria o diretório de destino se ele não existir.
+2.  **Extração e Conversão de Dados**:
+    
+    -   Extrai o arquivo RAR.
+    -   Converte o arquivo TXT para XLSX.
+    -   Extrai informações de CNPJ e valores totais das faturas em PDF.
+3.  **Integração de Dados**:
+    
+    -   Compara as faturas encontradas nos dados XLSX com as faturas no PDF para associar os CNPJs corretos.
+    -   Une os dados extraídos dos arquivos PDF e XLSX.
+4.  **Geração de Arquivos Finais**:
+    
+    -   Gera um arquivo XLSX final consolidado.
+5.  **Limpeza de Arquivos Temporários**:
+    
+    -   Remove arquivos temporários e limpa a pasta 'Faturas TIM'.
+6.  **Extração de Valores Totais Adicionais (Opcional)**:
+    
+    -   Extrai valores totais adicionais das faturas em PDF.
+    -   Cria um novo arquivo XLSX contendo os valores totais e números de fatura.
+7.  **Finalização**:
+    
+    -   Remove arquivos temporários adicionais e finaliza a execução do script.
+
 ## Funcionalidades Principais
 
 ### Processamento Principal
